@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+#define SIZE 5
+
+int main() {
+    int buffer[SIZE];
+    int in = 0, out = 0, item, choice;
+
+    while(1) {
+        printf("\n1.Produce\n2.Consume\n3.Exit\nEnter choice: ");
+        scanf("%d", &choice);
+
+        switch(choice) {
+
+            case 1:
+                if((in+1)%SIZE == out)
+                    printf("Buffer is Full!\n");
+                else {
+                    printf("Enter item: ");
+                    scanf("%d", &item);
+                    buffer[in] = item;
+                    in = (in+1)%SIZE;
+                }
+                break;
+
+            case 2:
+                if(in == out)
+                    printf("Buffer is Empty!\n");
+                else {
+                    printf("Consumed item: %d\n", buffer[out]);
+                    out = (out+1)%SIZE;
+                }
+                break;
+
+            case 3:
+                return 0;
+
+            default:
+                printf("Invalid choice\n");
+        }
+    }
+}
