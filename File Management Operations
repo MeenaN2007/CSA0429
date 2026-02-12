@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *fp;
+    int choice;
+    char data[100];
+
+    printf("1.Create & Write\n2.Read\n3.Delete\nEnter choice: ");
+    scanf("%d", &choice);
+
+    switch(choice) {
+
+        case 1:
+            fp = fopen("file.txt", "w");
+            printf("Enter data: ");
+            scanf(" %[^\n]", data);
+            fprintf(fp, "%s", data);
+            fclose(fp);
+            printf("File created and data written.\n");
+            break;
+
+        case 2:
+            fp = fopen("file.txt", "r");
+            if(fp == NULL) {
+                printf("File not found.\n");
+                break;
+            }
+            fscanf(fp, " %[^\n]", data);
+            printf("File content: %s\n", data);
+            fclose(fp);
+            break;
+
+        case 3:
+            remove("file.txt");
+            printf("File deleted.\n");
+            break;
+
+        default:
+            printf("Invalid choice.\n");
+    }
+
+    return 0;
+}
